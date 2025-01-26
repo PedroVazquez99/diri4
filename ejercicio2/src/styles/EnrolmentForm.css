@@ -1,0 +1,54 @@
+
+h1{
+    text-align: center;
+}
+.enrolForm label,
+.enrolForm input {
+    display: inline-block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.enrolForm label {
+    width: 100px; /* Adjust as needed */
+}
+
+
+input[type="text"] {
+    width: calc(100% - 110px);
+    background-color: #ffffff;
+    border: 1px solid #c9c7c7;
+    height: 4vh;
+    color: #1a1a1a;
+    border-radius: 5px;
+    margin-bottom: 2em;
+}
+
+input[type="submit"] {
+    background: #2a93a5;
+    height: 4vh;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+    &:active{
+        border: 1px solid #1d31c7;
+    }
+}
+
+li {
+    list-style-type: none;
+}
+
+.enrolForm .message{
+    width: 200px;
+    margin: 1em;
+    color: green;
+}
+
+select{
+    background: #ffffff;
+    color: #1a1a1a;
+    margin: 1em;
+    height: 4vh;
+    
+}
