@@ -2,22 +2,21 @@ import { FormEvent, useState } from 'react';
 import '../styles/EnrolmentForm.css';
 
 interface EnrolmentFormProps {
-    chosenProgram: string;
-    currentEnrolments: number;
-    onChangeEnrolments: (updateEnrolments: number) => void;
+  chosenProgram: string;
+  currentEnrolments: number;
+  onChangeEnrolments: (updateEnrolments: number) => void;
 }
 
 function EnrolmentForm(props: EnrolmentFormProps) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [welcomeMessage, setWelcomeMessage] = useState('');
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [welcomeMessage, setWelcomeMessage] = useState('');
-
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        setWelcomeMessage(`Bienvenido/a ${firstName} ${lastName}`);
-        props.onChangeEnrolments(props.currentEnrolments + 1);
-        event.preventDefault();
-    };
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    setWelcomeMessage(`Bienvenido/a ${firstName} ${lastName}`);
+    props.onChangeEnrolments(props.currentEnrolments + 1);
+    event.preventDefault();
+  };
 
   return (
     <div>
