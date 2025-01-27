@@ -1,6 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import '../styles/EnrolmentForm.css';
 import { Student } from '../entities/Student';
+import { v4 as uuidv4 } from 'uuid';
 
 interface EnrolmentFormProps {
     chosenProgram: string;
@@ -22,15 +23,16 @@ function EnrolmentForm(props: EnrolmentFormProps) {
         props.onChangeEnrolments(props.currentEnrolments + 1);
         event.currentTarget.reset(); // vaciamos el formulario
         event.preventDefault();
+ 
+      const student: Student = {
+          firstName: firstName,
+          lastName: lastName,
+          program: props.chosenProgram
+        };
+        props.onStudentChanged(student);
         
     };
 
-    const student: Student = {
-      irstName: firstName,
-      lastName: lastName,
-      program: props.chosenProgram
-      };
-      props.onStudentChanged(student);
 
   return (
     <div>

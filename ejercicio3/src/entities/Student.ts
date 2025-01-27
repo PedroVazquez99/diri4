@@ -1,6 +1,6 @@
 export interface Student {
     id?: string;
-    irstName: string;
+    firstName: string;
     lastName: string;
     program: string;
 }

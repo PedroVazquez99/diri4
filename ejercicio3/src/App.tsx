@@ -2,12 +2,14 @@ import { ChangeEvent, useState } from "react";
 import "./App.css";
 import EnrolmentForm from "./components/EnrolmentForm";
 import EnrolList from "./components/EnrolList";
+import { Student } from "./entities/Student";
 
 function App() {
-  const [ugEnrolments, setUGEnrolments] = useState(0);
   const [program, setProgram] = useState("UG"); // Para el select
+  const [ugEnrolments, setUGEnrolments] = useState(0);
   const [pgEnrolments, setPGEnrolments] = useState(0);
-  const [enrolments, setEnrolments] = useState(0); // Variable para contabilizar el numero de matriculas
+  const [student, setStudent] = useState({firstName: '', lastName: '', program: ''});
+  // const [enrolments, setEnrolments] = useState(0); // Variable para contabilizar el numero de matriculas
 
   // Funcion para cambiar en el SELECT
   const handleChangeProgram = (event: ChangeEvent<HTMLLIElement>) => {
@@ -16,8 +18,17 @@ function App() {
 
   // Evento que se comunica con el hijo
   const handleChangeEnrolments = (updateEnrolments: number) => {
-    setEnrolments(updateEnrolments);
+    
+    if (program === "UG") {
+      setUGEnrolments(updateEnrolments);
+    } else {
+      setPGEnrolments(updateEnrolments);
+    }
   };
+
+  const handleChangeStudent = (student: Student) => {
+    setStudent(student);
+  }
 
   const selectedEnrolments = (): number => {
     return program == "UG" ? ugEnrolments : pgEnrolments;
@@ -45,17 +56,17 @@ function App() {
               />
               Postgrado
             </li>
-            <li>Matriculaciones actuales: {enrolments}</li>
+            <li>Matriculaciones actuales: {program === 'UG' ? ugEnrolments : pgEnrolments}</li>
           </ul>
         </div>
         <EnrolmentForm
           chosenProgram={program}
           onChangeEnrolments={handleChangeEnrolments}
-          currentEnrolments={enrolments}
-          onStudentChanged={}
+          currentEnrolments={selectedEnrolments()}
+          onStudentChanged={handleChangeStudent}
          
         />
-        <EnrolList></EnrolList>
+        <EnrolList student={student}></EnrolList>
       </div>
     </>
   );

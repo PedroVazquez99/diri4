@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 import "../styles/EnrolList.css";
@@ -18,7 +18,7 @@ const columns = [
   {
     key: "fname",
     name: "Nombre",
-    fieldName: "firstName", // Corregido el typo 'ieldName' -> 'fieldName'
+    fieldName: "firstName",
     minWidth: 90,
     maxWidth: 200,
     isResizable: true,
@@ -26,7 +26,7 @@ const columns = [
   {
     key: "lname",
     name: "Apellidos",
-    fieldName: "lastName", // Corregido el typo en las comillas
+    fieldName: "lastName",
     minWidth: 90,
     maxWidth: 200,
     isResizable: true,
@@ -34,24 +34,23 @@ const columns = [
   {
     key: "program",
     name: "Estudios",
-    fieldName: "program", // Corregido el typo 'ieldName' -> 'fieldName'
+    fieldName: "program",
     minWidth: 60,
     maxWidth: 200,
     isResizable: true,
   },
 ];
 
-// Inserto en items los datos
-const items: any[] = [];
-for (let i = 1; i < 5; i++) {
-  items.push({
-    key: i,
-    fname: "Nombre de #" + i,
-    lname: "Apellidos de #" + i,
-    program: "UG",
-  });
-}
-
+// // Inserto en items los datos
+// const items: Student[] = [];
+// for (let i = 1; i < 5; i++) {
+//   items.push({
+//     key: i,
+//     fname: "Nombre de #" + i,
+//     lname: "Apellidos de #" + i,
+//     program: "UG",
+//   });
+// }
 
 
 function EnrolList(props: EnrolListProps) {
