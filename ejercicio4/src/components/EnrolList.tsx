@@ -11,6 +11,7 @@ initializeIcons(); // Requerido por FluentUI
 
 interface EnrolListProps {
   student?: Student;
+  onStudentRemoved: (student: Student) => void;
 }
 
 function EnrolList(props: EnrolListProps) {
@@ -72,6 +73,7 @@ function EnrolList(props: EnrolListProps) {
 
   const handleDelete = (item: Student) => {
     setItems(items.filter((i) => i.id !== item.id));
+    props.onStudentRemoved(item);
   };
 
   useEffect(() => {

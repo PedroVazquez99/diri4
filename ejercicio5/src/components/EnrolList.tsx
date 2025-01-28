@@ -11,6 +11,8 @@ initializeIcons(); // Requerido por FluentUI
 
 interface EnrolListProps {
   student?: Student;
+  onStudentRemoved: (student: Student) => void;
+  onStudentEditing: (student: Student) => void;
 }
 
 function EnrolList(props: EnrolListProps) {
@@ -66,23 +68,36 @@ function EnrolList(props: EnrolListProps) {
     },
   ];
 
+  // Envio el estudiante al padre para que lo edite
   const handleEdit = (item: Student) => {
-    setItems(items.filter((i) => i.id !== item.id));
+    props.onStudentEditing(item); // Funcion que se le pasa desde App.tsx
   };
 
   const handleDelete = (item: Student) => {
     setItems(items.filter((i) => i.id !== item.id));
+    props.onStudentRemoved(item);
   };
 
   useEffect(() => {
     if (props.student) {
       const currentID = props.student.id;
       if (currentID == undefined) {
-        const student: Student = {
-          ...props.student,
-          id: uuidv4(),
-        };
+        // Si no tiene ID, es un estudiante nuevo, es decir, no se esta editando por lo que debemos CREARLO
+        const student: Student = { ...props.student, id: uuidv4() };
         setItems([...items, student]);
+      } else {
+        // Si tiene ID, es un estudiante que se esta editando, por lo que debemos ACTUALIZARLO
+        const studentIndex = items.findIndex(
+          (item) => item.id === props.student!.id
+        );
+        if (studentIndex !== -1) {
+          const updatedItems = [...items];
+          updatedItems[studentIndex] = { ...props.student }; // reemplazamos el estudiante
+          setItems(updatedItems);
+        } else {
+          //TODO Ya lo gestionaremos mejor...
+          console.log("No encontramos el estudiante con ID " + studentIndex);
+        }
       }
     }
   }, [props.student]);
