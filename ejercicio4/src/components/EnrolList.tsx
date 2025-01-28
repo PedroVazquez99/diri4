@@ -5,23 +5,13 @@ import "../styles/EnrolList.css";
 import { DetailsList } from "@fluentui/react/lib/DetailsList"; // Corregido el typo en @luentui
 import { initializeIcons } from "@fluentui/react/lib/Icons";
 import { Student } from "../entities/Student";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 initializeIcons(); // Requerido por FluentUI
 
 interface EnrolListProps {
   student?: Student;
 }
-
-// // Inserto en items los datos
-// const items: Student[] = [];
-// for (let i = 1; i < 5; i++) {
-//   items.push({
-//     key: i,
-//     fname: "Nombre de #" + i,
-//     lname: "Apellidos de #" + i,
-//     program: "UG",
-//   });
-// }
 
 function EnrolList(props: EnrolListProps) {
   const [items, setItems] = useState<Student[]>([]);
@@ -52,7 +42,37 @@ function EnrolList(props: EnrolListProps) {
       maxWidth: 200,
       isResizable: true,
     },
+    {
+      key: "actions",
+      name: "Acciones",
+      eldName: "actions",
+      minWidth: 100,
+      maxWidth: 150,
+      isResizable: true,
+      onRender: (item: Student) => (
+        <div>
+          <MdEdit
+            style={{ cursor: "pointer", marginRight: "10px" }}
+            onClick={() => handleEdit(item)}
+            size={20}
+          />
+          <MdDelete
+            style={{ cursor: "pointer" }}
+            onClick={() => handleDelete(item)}
+            size={20}
+          />
+        </div>
+      ),
+    },
   ];
+
+  const handleEdit = (item: Student) => {
+    setItems(items.filter((i) => i.id !== item.id));
+  };
+
+  const handleDelete = (item: Student) => {
+    setItems(items.filter((i) => i.id !== item.id));
+  };
 
   useEffect(() => {
     if (props.student) {
