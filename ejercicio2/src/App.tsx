@@ -12,6 +12,7 @@ function App() {
     setProgram(event.target.value); // Actualizo el valor del select, lo haya dentro de value
   };
 
+  // Funcion para cambiar el valor de matriculaciones
   const handleEnrolments = (updateEnrolments: number) => { 
     setEnrolments(updateEnrolments);
   }
