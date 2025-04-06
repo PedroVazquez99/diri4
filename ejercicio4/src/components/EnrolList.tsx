@@ -46,7 +46,7 @@ function EnrolList(props: EnrolListProps) {
     {
       key: "actions",
       name: "Acciones",
-      eldName: "actions",
+      fieldName: "actions",
       minWidth: 100,
       maxWidth: 150,
       isResizable: true,
